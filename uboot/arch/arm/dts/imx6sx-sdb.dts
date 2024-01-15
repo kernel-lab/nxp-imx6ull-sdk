@@ -1,0 +1,94 @@
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright (C) 2015 Freescale Semiconductor, Inc.
+
+#include "imx6sx-sdb.dtsi"
+
+/ {
+	model = "NXP i.MX6 SoloX SDB RevB Board";
+
+	regulators {
+		/* Transceiver EN/STBY is active low on RevB board */
+		reg_can_stby: regulator@10 {
+			gpio = <&gpio4 27 GPIO_ACTIVE_LOW>;
+		};
+	};
+};
+
+&cpu0 {
+	operating-points = <
+		/* kHz    uV */
+		996000  1250000
+		792000  1175000
+		396000  1175000
+	>;
+	fsl,soc-operating-points = <
+		/* ARM kHz      SOC uV */
+		996000  1250000
+		792000  1175000
+		396000  1175000
+	>;
+
+	fsl,arm-soc-shared = <1>;
+};
+
+&reg_arm {
+	vin-supply = <&sw1a_reg>;
+	regulator-allow-bypass;
+};
+
+&reg_soc {
+	vin-supply = <&sw1a_reg>;
+	regulator-allow-bypass;
+};
+
+&qspi2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_qspi2>;
+	status = "okay";
+
+#ifndef SPANSIONFLASH
+	ddrsmp=<0>;
+
+	flash0: n25q256a@0 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "micron,n25q256a", "jedec,spi-nor";
+		spi-max-frequency = <29000000>;
+		reg = <0>;
+	};
+
+	flash1: n25q256a@2 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "micron,n25q256a", "jedec,spi-nor";
+		spi-max-frequency = <29000000>;
+		reg = <2>;
+	};
+#endif
+};
+
+&usbphy1 {
+	fsl,tx-d-cal = <106>;
+};
+
+&usbphy2 {
+	fsl,tx-d-cal = <106>;
+};
+
+&reg_vdd1p1 {
+	vin-supply = <&vgen6_reg>;
+};
+
+&reg_vdd2p5 {
+	vin-supply = <&vgen6_reg>;
+};
+
+&reg_can_stby {
+	/* Transceiver EN/STBY is active low on RevB board */
+	gpio = <&gpio4 27 GPIO_ACTIVE_LOW>;
+};
+
+&snvs_pwrkey {
+	status = "okay";
+};
