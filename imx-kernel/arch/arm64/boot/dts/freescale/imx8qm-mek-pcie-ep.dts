@@ -1,0 +1,28 @@
+// SPDX-License-Identifier: GPL-2.0+
+/*
+ * Copyright 2020 NXP
+ */
+
+/dts-v1/;
+
+#include "imx8qm-mek-rpmsg.dts"
+
+&pciea{
+	status = "disabled";
+};
+
+&pcieb{
+	status = "disabled";
+};
+
+&lsio_mu8{
+	doorbell-reg = <0x5d2c0000 0x10000>;
+	status = "okay";
+};
+
+&pciea_ep{
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_pciea>;
+	ext_osc = <1>;
+	status = "okay";
+};
