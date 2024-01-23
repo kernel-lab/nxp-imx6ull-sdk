@@ -1,5 +1,5 @@
 # NXP-IMX6ULL-SDK
-基于NXP官方uboot&amp;linux kernl制作正点原子alpha-imx6ull-sdk
+基于NXP官方uboot&amp;linux kernel制作正点原子alpha-imx6ull-sdk
 
 # U-Boot版本
 imx_v2020.04_5.4.70_2.3.0
