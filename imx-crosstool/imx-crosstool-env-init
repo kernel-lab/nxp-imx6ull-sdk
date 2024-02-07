@@ -1,0 +1,39 @@
+# Automatically initialize the cross-compiler and related environment variables.
+#
+# Date of creation : 2024.02.07
+#
+# Version change
+# Data            Version number        Description
+# 2024.02.07      V1.0.0                创建基本文件，实现基本的功能
+
+export CROSSTOOL_FLAG="1"
+
+SDK_TOOLCHAINPATH=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)
+TOOLCHAIN_ROOT=${SDK_TOOLCHAINPATH}/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf
+
+# Check if the directory exists
+if [ ! -d "${TOOLCHAIN_ROOT}/bin" ]; then
+    echo "Error: the directory does not exist!!!"
+fi
+
+export PATH=$PATH:${TOOLCHAIN_ROOT}/bin
+echo "toolchain path:${PATH}"
+
+# The definition function is used to check for arm-linux-gnueabihf-gcc version
+check_arm_linux_gnueabihf_gcc_version()
+{
+    local VERSION=$(arm-linux-gnueabihf-gcc --version 2>&1)
+    if [[ -n "$VERSION" ]]; then
+        echo "arm-linux-gnueabihf-gcc version is as follows:"
+        echo "$FIND_VERSION"
+    else
+        export CROSSTOOL_FLAG="0"
+        echo "no version found!!!"
+    fi
+
+    echo "CROSSTOOL_FLAG = $CROSSTOOL_FLAG"
+}
+
+# Call the function to check the version
+check_arm_linux_gnueabihf_gcc_version
+
