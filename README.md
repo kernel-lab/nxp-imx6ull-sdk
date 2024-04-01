@@ -1,4 +1,4 @@
-# NXP-IMX6ULL-SDK
+# Project Name: nxp-imx6ull-sdk
 基于NXP官方uboot&linux kernel制作正点原子alpha-imx6ull-sdk
 
 # U-Boot版本
