@@ -5,11 +5,13 @@
 # Version change
 # Data            Version number        Description
 # 2024.02.07      V1.0.0                创建基本文件，实现基本的功能
+# 2024.04.02      V1.1.0                实现对buildroot下交叉编译工具链路径的修改
 
 export CROSSTOOL_FLAG="1"
 
 SDK_TOOLCHAINPATH=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)
 TOOLCHAIN_ROOT=${SDK_TOOLCHAINPATH}/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf
+SDK_ROOT_PATH=$(cd "$SDK_TOOLCHAINPATH/.." && pwd)
 
 # Check if the directory exists
 if [ ! -d "${TOOLCHAIN_ROOT}/bin" ]; then
@@ -19,13 +21,20 @@ fi
 export PATH=$PATH:${TOOLCHAIN_ROOT}/bin
 echo "toolchain path:${PATH}"
 
+# Correct the path of the buildroot compilation toolchain
+set_buildroot_toolchain_path()
+{
+    sed -i "s|BR2_TOOLCHAIN_EXTERNAL_PATH=\".*\"|BR2_TOOLCHAIN_EXTERNAL_PATH=\"${TOOLCHAIN_ROOT}/bin\"|g" "${SDK_ROOT_PATH}/imx-rootfs/configs/imx6ull_alpha_defconfig"
+}
+
 # The definition function is used to check for arm-linux-gnueabihf-gcc version
 check_arm_linux_gnueabihf_gcc_version()
 {
     local VERSION=$(arm-linux-gnueabihf-gcc --version 2>&1)
     if [[ -n "$VERSION" ]]; then
         echo "arm-linux-gnueabihf-gcc version is as follows:"
-        echo "$FIND_VERSION"
+        echo "$TOOLCHAIN_ROOT"
+        set_buildroot_toolchain_path
     else
         export CROSSTOOL_FLAG="0"
         echo "no version found!!!"
