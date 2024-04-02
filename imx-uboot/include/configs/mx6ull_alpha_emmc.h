@@ -16,6 +16,8 @@
 #include "imx_env.h"
 
 #define is_mx6ull_9x9_evk()	CONFIG_IS_ENABLED(TARGET_MX6ULL_9X9_EVK)
+#define is_mx6ull_atk_alpha()	CONFIG_IS_ENABLED(TARGET_MX6ULL_ALPHA_EMMC)
+#define ATK_ALPHA_IMX6ULL_BORAD		1	// atk-alpha-imx6ull
 
 #ifdef CONFIG_TARGET_MX6ULL_9X9_EVK
 #define PHYS_SDRAM_SIZE		SZ_256M
@@ -187,6 +189,8 @@
 					"setenv fdt_file imx6ull-9x9-evk.dtb; fi; " \
 				"if test $board_name = EVK && test $board_rev = 14X14; then " \
 					"setenv fdt_file imx6ull-14x14-evk.dtb; fi; " \
+				"if test $board_name = ATK && test $board_rev = alpha; then " \
+					"setenv fdt_file imx6ull-alpha.dtb; fi; " \
 				"if test $fdt_file = undefined; then " \
 					"echo WARNING: Could not determine dtb to use; " \
 				"fi; " \
@@ -199,6 +203,8 @@
 					"setenv tee_file uTee-6ullevk; fi; " \
 				"if test $board_name = EVK && test $board_rev = 14X14; then " \
 					"setenv tee_file uTee-6ullevk; fi; " \
+				"if test $board_name = ATK && test $board_rev = alpha; then " \
+					"setenv tee_file uTee-6ull_alpha; fi; " \
 				"if test $tee_file = undefined; then " \
 					"echo WARNING: Could not determine tee to use; " \
 				"fi; " \
