@@ -24,7 +24,7 @@ echo "toolchain path:${PATH}"
 # Correct the path of the buildroot compilation toolchain
 set_buildroot_toolchain_path()
 {
-    sed -i "s|BR2_TOOLCHAIN_EXTERNAL_PATH=\".*\"|BR2_TOOLCHAIN_EXTERNAL_PATH=\"${TOOLCHAIN_ROOT}/bin\"|g" "${SDK_ROOT_PATH}/imx-rootfs/configs/imx6ull_alpha_defconfig"
+    sed -i "s|BR2_TOOLCHAIN_EXTERNAL_PATH=\".*\"|BR2_TOOLCHAIN_EXTERNAL_PATH=\"${TOOLCHAIN_ROOT}\"|g" "${SDK_ROOT_PATH}/imx-rootfs/configs/imx6ull_alpha_defconfig"
 }
 
 # The definition function is used to check for arm-linux-gnueabihf-gcc version
