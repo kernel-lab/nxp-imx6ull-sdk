@@ -1,12 +1,14 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2023.02.9 Configuration
+# Buildroot -g925423006-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
 BR2_HOST_GCC_AT_LEAST_5=y
 BR2_HOST_GCC_AT_LEAST_6=y
 BR2_HOST_GCC_AT_LEAST_7=y
+BR2_HOST_GCC_AT_LEAST_8=y
+BR2_HOST_GCC_AT_LEAST_9=y
 
 #
 # Target options
@@ -166,7 +168,7 @@ BR2_TOOLCHAIN_EXTERNAL=y
 BR2_TOOLCHAIN_EXTERNAL_CUSTOM=y
 # BR2_TOOLCHAIN_EXTERNAL_DOWNLOAD is not set
 BR2_TOOLCHAIN_EXTERNAL_PREINSTALLED=y
-BR2_TOOLCHAIN_EXTERNAL_PATH="/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf"
+BR2_TOOLCHAIN_EXTERNAL_PATH="/home/user/Project/imx6ull/nxp-imx6ull-sdk/imx-crosstool/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf"
 BR2_TOOLCHAIN_EXTERNAL_GLIBC=y
 BR2_PACKAGE_HAS_TOOLCHAIN_EXTERNAL=y
 BR2_PACKAGE_PROVIDES_TOOLCHAIN_EXTERNAL="toolchain-external-custom"
@@ -902,10 +904,6 @@ BR2_PACKAGE_PROVIDES_HOST_GETTEXT="host-gettext-tiny"
 BR2_PACKAGE_MIDORI_ARCH_SUPPORTS=y
 
 #
-# midori needs a glibc toolchain w/ C++, wchar, threads, dynamic library, gcc >= 7, host gcc >= 8
-#
-
-#
 # midori needs libgtk3 w/ X11 or wayland backend
 #
 BR2_PACKAGE_NETSURF_ARCH_SUPPORTS=y
@@ -1309,10 +1307,7 @@ BR2_PACKAGE_HOST_MONO_ARCH_SUPPORTS=y
 BR2_PACKAGE_MONO_ARCH_SUPPORTS=y
 # BR2_PACKAGE_MONO is not set
 BR2_PACKAGE_NODEJS_ARCH_SUPPORTS=y
-
-#
-# nodejs needs a toolchain w/ C++, dynamic library, NPTL, gcc >= 7, wchar, host gcc >= 8
-#
+# BR2_PACKAGE_NODEJS is not set
 
 #
 # octave needs a toolchain w/ C++ and fortran, gcc >= 4.8
@@ -2058,10 +2053,6 @@ BR2_PACKAGE_GOBJECT_INTROSPECTION_ARCH_SUPPORTS=y
 #
 # gobject-introspection needs python3
 #
-
-#
-# gobject-introspection needs a glibc toolchain, gcc >= 4.9, host gcc >= 8
-#
 # BR2_PACKAGE_GSL is not set
 # BR2_PACKAGE_GTEST is not set
 # BR2_PACKAGE_GUMBO_PARSER is not set
@@ -2120,10 +2111,6 @@ BR2_PACKAGE_LIBNSPR_ARCH_SUPPORT=y
 
 #
 # libpeas needs python3
-#
-
-#
-# libpeas needs a glibc toolchain, gcc >= 4.9, host gcc >= 8
 #
 # BR2_PACKAGE_LIBPFM4 is not set
 # BR2_PACKAGE_LIBPLIST is not set
@@ -2877,9 +2864,9 @@ BR2_TARGET_ROOTFS_EXT2_NONE=y
 # BR2_TARGET_ROOTFS_ROMFS is not set
 # BR2_TARGET_ROOTFS_SQUASHFS is not set
 BR2_TARGET_ROOTFS_TAR=y
-BR2_TARGET_ROOTFS_TAR_NONE=y
+# BR2_TARGET_ROOTFS_TAR_NONE is not set
 # BR2_TARGET_ROOTFS_TAR_GZIP is not set
-# BR2_TARGET_ROOTFS_TAR_BZIP2 is not set
+BR2_TARGET_ROOTFS_TAR_BZIP2=y
 # BR2_TARGET_ROOTFS_TAR_LZ4 is not set
 # BR2_TARGET_ROOTFS_TAR_LZMA is not set
 # BR2_TARGET_ROOTFS_TAR_LZO is not set
@@ -2973,10 +2960,7 @@ BR2_PACKAGE_HOST_MKPASSWD=y
 # BR2_PACKAGE_HOST_MTD is not set
 # BR2_PACKAGE_HOST_MTOOLS is not set
 # BR2_PACKAGE_HOST_MXSLDR is not set
-
-#
-# host nodejs needs a host gcc >= 8
-#
+# BR2_PACKAGE_HOST_NODEJS is not set
 # BR2_PACKAGE_HOST_ODB is not set
 # BR2_PACKAGE_HOST_OMAP_U_BOOT_UTILS is not set
 # BR2_PACKAGE_HOST_OPENOCD is not set
@@ -2999,10 +2983,7 @@ BR2_PACKAGE_HOST_PATCHELF=y
 BR2_PACKAGE_HOST_QEMU_ARCH_SUPPORTS=y
 BR2_PACKAGE_HOST_QEMU_SYSTEM_ARCH_SUPPORTS=y
 BR2_PACKAGE_HOST_QEMU_USER_ARCH_SUPPORTS=y
-
-#
-# host-qemu needs a host gcc >= 8
-#
+# BR2_PACKAGE_HOST_QEMU is not set
 # BR2_PACKAGE_HOST_QORIQ_RCW is not set
 # BR2_PACKAGE_HOST_RASPBERRYPI_USBBOOT is not set
 # BR2_PACKAGE_HOST_RAUC is not set
