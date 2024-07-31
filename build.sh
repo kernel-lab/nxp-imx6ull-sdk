@@ -1,38 +1,100 @@
 #!/bin/bash
 
 SDK_PATH=$(pwd)
-UBOOT_PATH="$SDK_PATH/imx-uboot"
-KERNEL_PATH="$SDK_PATH/imx-kernel"
-ROOTFS_PATH="$SDK_PATH/imx-rootfs"
 
-example_uage()
+usage()
 {
     echo -e "\033[31mInvalid argument. Example Usage: \033[0m"
+    echo -e "\033[31m ./build.sh {all   |all_clean                     }\033[0m"
     echo -e "\033[31m ./build.sh {uboot |uboot_clean |uboot_menuconfig }\033[0m"
     echo -e "\033[31m ./build.sh {kernel|kernel_clean|kernel_menuconfig}\033[0m"
     echo -e "\033[31m ./build.sh {rootfs|rootfs_clean|rootfs_menuconfig}\033[0m"
 }
 
+check_target_dir()
+{
+    local target_dir="$SDK_PATH/imx-target"
+    if [ ! -d "$target_dir" ]; then
+        echo "directory $target_dir does not exist. creating it now."
+        mkdir -p "$target_dir"
+    fi
+}
+
+cp_target()
+{
+    local type=$1
+    local path=$2
+
+    if [ "$type" = "uboot" ]; then
+        cp "$path/u-boot-dtb.imx" "$SDK_PATH/imx-target"
+    elif [ "$type" = "kernel" ]; then
+        cp "$path/arch/arm/boot/zImage" "$SDK_PATH/imx-target"
+    elif [ "$type" = "rootfs" ]; then
+        cp "$path/output/images/rootfs.tar.bz2" "$SDK_PATH/imx-target"
+    fi
+}
+
+rm_target()
+{
+    local type=$1
+
+    if [ "$type" = "uboot" ]; then
+        rm "$SDK_PATH/imx-target/u-boot-dtb.imx"
+    elif [ "$type" = "kernel" ]; then
+        rm "$SDK_PATH/imx-target/zImage"
+    elif [ "$type" = "rootfs" ]; then
+        rm "$SDK_PATH/imx-target/rootfs.tar.bz2"
+    fi
+}
+
+execute_command()
+{
+    local path=$1
+    local cmd=$2
+    cd "$path" || {
+        echo "Failed to enter $path"
+        exit 1
+    }
+    echo "Entering $path and executing $cmd"
+    eval "$cmd" || exit 1
+}
+
 build_function()
 {
     case "$1" in
-        uboot)
-            cd "$UBOOT_PATH" || exit 1
-            echo "Entering $UBOOT_PATH and executing ./build_uboot.sh"
-            ./build_uboot.sh || exit 1
+        uboot|kernel|rootfs)
+            local action="build_${1}"
+            execute_command "$SDK_PATH/imx-$1" "./${action}.sh"
+            check_target_dir
+            cp_target "$1" "$SDK_PATH/imx-$1"
             ;;
-        uboot_clean)
-            cd "$UBOOT_PATH" || exit 1
-            echo "Entering $UBOOT_PATH and executing ./build_uboot.sh clean"
-            ./build_uboot.sh clean || exit 1
+        uboot_clean|kernel_clean|rootfs_clean)
+            local action="build_${1%_clean}"
+            execute_command "$SDK_PATH/imx-${1%_clean}" "./${action}.sh clean"
+            rm_target "${1%_clean}"
             ;;
-        uboot_menuconfig)
-            cd "$UBOOT_PATH" || exit 1
-            echo "Entering $UBOOT_PATH and executing ./build_uboot.sh menuconfig"
-            ./build_uboot.sh menuconfig || exit 1
+        uboot_menuconfig|kernel_menuconfig|rootfs_menuconfig)
+            local action="build_${1%_menuconfig}"
+            execute_command "$SDK_PATH/imx-${1%_menuconfig}" "./${action}.sh menuconfig"
+            ;;
+        all)
+            for component in uboot kernel rootfs; do
+                local action="build_$component"
+                execute_command "$SDK_PATH/imx-$component" "./${action}.sh"
+                check_target_dir
+                cp_target "$component" "$SDK_PATH/imx-$component"
+            done
+            ;;
+        all_clean)
+            for component in uboot kernel rootfs; do
+                local action="build_${component}"
+                execute_command "$SDK_PATH/imx-$component" "./${action}.sh clean"
+                check_target_dir
+                rm_target "$component"
+            done
             ;;
         *)
-            example_uage
+            usage
             exit 1
             ;;
     esac
