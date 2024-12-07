@@ -27,10 +27,13 @@ cp_target()
 
     if [ "$type" = "uboot" ]; then
         cp "$path/u-boot-dtb.imx" "$SDK_PATH/imx-target"
+        mv "$SDK_PATH/imx-target/u-boot-dtb.imx" "$SDK_PATH/imx-target/u-boot-imx6ull-14x14-ddr512-emmc.imx"
     elif [ "$type" = "kernel" ]; then
         cp "$path/arch/arm/boot/zImage" "$SDK_PATH/imx-target"
         sleep 1
         cp "$path/arch/arm/boot/dts/imx6ull-alpha-emmc.dtb" "$SDK_PATH/imx-target"
+        sleep 1
+        mv "$SDK_PATH/imx-target/imx6ull-alpha-emmc.dtb" "$SDK_PATH/imx-target/imx6ull-14x14-emmc-7-1024x600-c.dtb"
     elif [ "$type" = "rootfs" ]; then
         cp "$path/output/images/rootfs.tar.bz2" "$SDK_PATH/imx-target"
     fi
@@ -41,11 +44,11 @@ rm_target()
     local type=$1
 
     if [ "$type" = "uboot" ]; then
-        rm "$SDK_PATH/imx-target/u-boot-dtb.imx"
+        rm "$SDK_PATH/imx-target/u-boot-imx6ull-14x14-ddr512-emmc.imx"
     elif [ "$type" = "kernel" ]; then
         rm "$SDK_PATH/imx-target/zImage"
         sleep 1
-        rm "$SDK_PATH/imx-target/imx6ull-alpha-emmc.dtb"
+        rm "$SDK_PATH/imx-target/imx6ull-14x14-emmc-7-1024x600-c.dtb"
     elif [ "$type" = "rootfs" ]; then
         rm "$SDK_PATH/imx-target/rootfs.tar.bz2"
     fi
