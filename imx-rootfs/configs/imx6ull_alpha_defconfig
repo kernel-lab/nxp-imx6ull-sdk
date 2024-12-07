@@ -168,7 +168,7 @@ BR2_TOOLCHAIN_EXTERNAL=y
 BR2_TOOLCHAIN_EXTERNAL_CUSTOM=y
 # BR2_TOOLCHAIN_EXTERNAL_DOWNLOAD is not set
 BR2_TOOLCHAIN_EXTERNAL_PREINSTALLED=y
-BR2_TOOLCHAIN_EXTERNAL_PATH="/home/user/Project/imx6ull/nxp-imx6ull-sdk/imx-crosstool/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf"
+BR2_TOOLCHAIN_EXTERNAL_PATH="/home/bruce/Project/nxp-imx6ull-sdk/imx-crosstool/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf"
 BR2_TOOLCHAIN_EXTERNAL_GLIBC=y
 BR2_PACKAGE_HAS_TOOLCHAIN_EXTERNAL=y
 BR2_PACKAGE_PROVIDES_TOOLCHAIN_EXTERNAL="toolchain-external-custom"
