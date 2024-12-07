@@ -29,6 +29,8 @@ cp_target()
         cp "$path/u-boot-dtb.imx" "$SDK_PATH/imx-target"
     elif [ "$type" = "kernel" ]; then
         cp "$path/arch/arm/boot/zImage" "$SDK_PATH/imx-target"
+        sleep 1
+        cp "$path/arch/arm/boot/dts/imx6ull-alpha-emmc.dtb" "$SDK_PATH/imx-target"
     elif [ "$type" = "rootfs" ]; then
         cp "$path/output/images/rootfs.tar.bz2" "$SDK_PATH/imx-target"
     fi
@@ -42,6 +44,8 @@ rm_target()
         rm "$SDK_PATH/imx-target/u-boot-dtb.imx"
     elif [ "$type" = "kernel" ]; then
         rm "$SDK_PATH/imx-target/zImage"
+        sleep 1
+        rm "$SDK_PATH/imx-target/imx6ull-alpha-emmc.dtb"
     elif [ "$type" = "rootfs" ]; then
         rm "$SDK_PATH/imx-target/rootfs.tar.bz2"
     fi
