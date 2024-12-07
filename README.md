@@ -1,19 +1,20 @@
-# 项目名称: nxp-imx6ull-sdk
-- 基于NXP官方uboot和linux kernel制作正点原子alpha-imx6ull-sdk
+# Project Name: nxp-imx6ull-sdk
+- Based on the official NXP U-Boot and Linux kernel to create Alpha-IMX6ULL-SDK by Zhengdianyuan
 
-## U-Boot版本
+## U-Boot Version
 - imx_v2020.04_5.4.70_2.3.0
 
-## Linux Kernel 版本
+## Linux Kernel Version
 - imx_5.4.70_2.3.0
 
-## 文件系统构建
-- 使用Buildroot进行构建
-- Buildroot版本: buildroot-2023.02.9
+## File System Construction
+- Built using Buildroot
+- Buildroot version: buildroot-2023.02.9
 
-## 工程目录结构
+## Project Directory Structure
 - NXP-IMX6ULL-SDK
-  - imx-uboot: uboot源码
-  - imx-kernel: linux kernel源码
-  - imx-rootfs: 文件系统
-  - imx-crosstool: 交叉编译工具链
+  - imx-uboot: U-Boot source code
+  - imx-kernel: Linux kernel source code
+  - imx-rootfs: File system
+  - imx-crosstool: Cross-compilation toolchain & flashing tools
+  - imx-target: Target files
