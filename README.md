@@ -18,3 +18,26 @@
   - imx-rootfs: File system
   - imx-crosstool: Cross-compilation toolchain & flashing tools
   - imx-target: Target files
+
+## Quick Start Guide
+First download the SDK Project:
+$: git clone https://github.com/nxp-imx/meta-imx.git
+
+Run SDK Project Setup:
+source ./build-sdk.sh
+
+Building uboot
+---------------------
+  $ makeuboot or ./build.sh uboot
+
+Building kernel
+---------------------
+  $ makekernel or ./build.sh kernel
+
+Building rootfs
+---------------------
+  $ makerootfs or ./build.sh rootfs
+
+Building all
+---------------------
+  $ build-all-image or ./build.sh all
