@@ -21,7 +21,7 @@
 
 ## Quick Start Guide
 First download the SDK Project:
-$: git clone https://github.com/nxp-imx/meta-imx.git
+$: git clone https://github.com/kernel-lab/nxp-imx6ull-sdk.git
 
 Run SDK Project Setup:
 source ./build-sdk.sh
