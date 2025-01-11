@@ -30,5 +30,4 @@ if [ $# -eq 0 ]; then
     make imx6ull_alpha_defconfig
     make
     echo -e "${GREEN}########## Build rootfs successful!!! #########${RESET}"
-    exit 1
 fi
